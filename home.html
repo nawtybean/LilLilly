@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lil Lilly's Bakery</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #fff9f8;
+      color: #4b2e2e;
+      line-height: 1.6;
+    }
+
+    .top-bar {
+      background: #f8a3b3;
+      text-align: center;
+      color: white;
+      padding: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .header {
+      background: linear-gradient(90deg, #c0ecf5, #e3f3f6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+    }
+
+    .header img {
+      height: 70px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: #444;
+      font-weight: 500;
+    }
+
+    .nav a:hover {
+      border-bottom: 2px solid #000;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #b03c3c;
+    }
+
+
+    #hero {
+      background: url('static/img/hero.png') no-repeat center center/cover;
+      height: 60vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 2rem;
+    }
+
+    .hero-content {
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 2rem;
+      border-radius: 12px;
+    }
+
+    .hero-content h2 {
+      font-size: 2.5rem;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #b03c3c;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      background-color: #922e2e;
+    }
+
+    .section {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .product {
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .product h3 {
+      margin-bottom: 0.5rem;
+      color: #b03c3c;
+    }
+
+    .footer {
+      background-color: #f8d2d2;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      border-top: 2px solid #e9b6b6;
+    }
+
+    .footer .footer-links {
+      margin: 1rem 0;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer .footer-links a {
+      text-decoration: none;
+      color: #4b2e2e;
+    }
+
+    .footer .footer-links a:hover {
+      color: #b03c3c;
+    }
+
+    /* ------------------------------------------ */
+
+    .carousel-container {
+    position: relative;
+    overflow: hidden;
+    max-width: 90%;
+    margin: 2rem auto;
+  }
+
+  .carousel-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 1rem;
+  }
+
+  .carousel-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery-thumb {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 2rem;
+    color: #b03c3c;
+    border-radius: 50%;
+    z-index: 10;
+  }
+
+  .carousel-btn.left {
+    left: 0;
+  }
+
+  .carousel-btn.right {
+    right: 0;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+
+  .modal-content {
+    margin: auto;
+    display: block;
+    max-width: 80%;
+    max-height: 80vh;
+  }
+
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  </style>
+</head>
+<body>
+
+
+
+  <div class="top-bar">
+    Easter Icing Classes are now open for booking! Book your spot today!
+  </div>
+
+  <header class="header">
+    <img src="static/img/logo.png" alt="Lil Lilly's Bakery Logo">
+    <nav class="nav">
+        <a href="#home">Home</a>
+        <a href="#shop">Book a Class</a>
+        <a href="#gallery">Gallery</a>
+       <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="hero">
+    <div class="hero-content">
+      <h2>Bespoke Royal Icing Cookies</h2>
+      <p>Indulge in the delightful taste of perfection, handmade just for you.</p>
+      <a href="#shop" class="btn">Book a Class</a>
+    </div>
+  </section>
+
+  <section id="shop" class="section" >
+    <h3 style="font-size: 1.8rem; color: #b03c3c; margin-bottom: 1rem;">Book a Royal Icing Class</h3>
+    <div class="products">
+      <div class="product">
+        <img src="static/img/IMG-20250327-WA0027.jpg" alt="Easter Biscuit Class" style="width: 25%; border-radius: 8px; margin-bottom: 1rem;">
+        <h3>Beginner Royal Icing Classes</h3>
+        <p>✨ Master the magic of royal icing – outlining, flooding & wet-on-wet made easy</p>
+        <p>🐣 Decorate your very own set of delightful Easter-themed biscuits</p>
+        <p>🎁 Take home our exclusive biscuit & royal icing recipes – yours to keep and recreate!</p>
+        <p>👩‍🍳 All tools and supplies provided – just bring your creativity</p>
+        <p>📸 Snap Insta-worthy photos of your biscuit creations</p>
+        <p>🫖 Enjoy a warm cuppa and sweet treats while you decorate</p>
+        <p>💬 Connect with fellow baking lovers in a fun, relaxed environment</p>
+        <p>🏅 Leave with a certificate of participation and sweet bragging rights!</p>
+        <p><strong>R450.00</strong></p>
+        <a href="product-beginner.html" class="btn">Book Now</a>
+      </div>
+
+      <div class="product">
+        <img src="static/img/IMG-20250327-WA0027.jpg" alt="Easter Biscuit Class" style="width: 25%; border-radius: 8px; margin-bottom: 1rem;">
+        <h3>Advanced Royal Icing Classes</h3>
+        <p>🌸 Level up your skills with advanced piping, layering & dimensional techniques</p>
+        <p>🎨 Learn how to create floral details, lacework, characters & textures</p>
+        <p>🧁 Decorate a full set of intricate themed biscuits with professional finishes</p>
+        <p>🛠️ Explore edible embellishments like gold leaf, sprinkles & dusts</p>
+        <p>📘 Receive a printed decorating guide with step-by-step tips</p>
+        <p>📸 Capture your creations for your baking portfolio or social feed</p>
+        <p>☕ Relax with a hot drink and treats while you decorate</p>
+        <p>🎓 Walk away with serious icing confidence and brag-worthy skills!</p>
+        <p><strong>R550.00</strong></p>
+        <a href="" class="btn">Coming Soon!</a>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="shop" class="section" style="background-color: #fff;">
+    <h3 style="font-size: 1.8rem; color: #b03c3c; margin-bottom: 1rem;">Order Your Own Cookie Magic ✨</h3>
+      <p>Got a theme, color scheme, or idea in mind? We’ll bring it to life—one cookie at a time! At Lil Lilly’s Bakery, we specialize in handcrafted royal icing cookies made just for you. Whether it’s for a birthday, baby shower, wedding, or “just because,” we bake and decorate each cookie to match your vision.</p>
+        <br>
+        <p>🎨 Choose your shapes, colors, and message</p>
+        <p>🍪 Every cookie is hand-piped with love and care</p>
+        <p>📦 Perfect for gifting or treating yourself</p>
+        <br>
+      <p>No two batches are ever the same—your cookies will be as unique as your celebration. Let’s whip up something sweet together!</p>
+
+
+      <section id="gallery" class="section">
+        <div class="carousel-container">
+          <button class="carousel-btn left" onclick="scrollGallery(-1)">&#10094;</button>
+          <div class="carousel-track" id="carousel-track">
+            <img src="static/img/IMG-20250327-WA0027.jpg" alt="Gallery 1" class="gallery-thumb">
+            <img src="static/img/IMG-20250327-WA0028.jpg" alt="Gallery 2" class="gallery-thumb">
+            <img src="static/img/IMG-20250327-WA0029.jpg" alt="Gallery 3" class="gallery-thumb">
+            <img src="static/img/IMG-20250327-WA0029.jpg" alt="Gallery 4" class="gallery-thumb">
+            <img src="static/img/IMG-20250327-WA0030.jpg" alt="Gallery 5" class="gallery-thumb">
+            <img src="static/img/IMG-20250327-WA0031.jpg" alt="Gallery 6" class="gallery-thumb">
+            <img src="static/img/IMG-20250327-WA0032.jpg" alt="Gallery 6" class="gallery-thumb">
+            <img src="static/img/IMG-20250327-WA0033.jpg" alt="Gallery 6" class="gallery-thumb">
+            <img src="static/img/IMG-20250327-WA0034.jpg" alt="Gallery 6" class="gallery-thumb">
+            <img src="static/img/IMG-20250327-WA0035.jpg" alt="Gallery 6" class="gallery-thumb">
+            <img src="static/img/IMG-20250327-WA0076.jpg" alt="Gallery 6" class="gallery-thumb">
+            <img src="static/img/IMG-20250327-WA0077.jpg" alt="Gallery 6" class="gallery-thumb">
+            <img src="static/img/IMG-20250327-WA0079.jpg" alt="Gallery 6" class="gallery-thumb">
+            <img src="static/img/IMG-20250327-WA0080.jpg" alt="Gallery 6" class="gallery-thumb">
+          </div>
+          <button class="carousel-btn right" onclick="scrollGallery(1)">&#10095;</button>
+        </div>
+      </section>
+  </section>
+
+
+
+
+  <!-- Modal Structure -->
+  <div id="modal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modal-img">
+  </div>
+
+  <section id="contact" class="section">
+    <h2>Let’s Chat! 💌</h2>
+    <p>Have a question, want to place a custom order, or ready to book your spot in class? We’d love to hear from you!</p>
+    <br>
+    <p>📧 <strong>Email:</strong> <a href="mailto:mariskahuttingh@gmail.com">mariskahuttingh@gmail.com</a></p>
+    <p>📞 <strong>Call or SMS:</strong> <a href="tel:0825609716">082 560 9716</a></p>
+    <p>💬 <strong>WhatsApp:</strong> <a href="https://wa.me/+27825609716">Chat with us on WhatsApp</a></p>
+    <br>
+    <p>We’ll get back to you as soon as we finish icing our cookies! 🍪💕</p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-and-conditions.html">Terms of Service</a>
+      <a href="mailto:mariskahuttingh@gmail.com">Email Us</a>
+      <a href="https://wa.me/+27825609716">WhatsApp</a>
+      <a href="https://www.facebook.com/profile.php?id=100057332295121" target="_blank">Facebook</a>
+    </div>
+    <p>&copy; 2025 Lil Lilly's Bakery. All rights reserved.</p>
+  </footer>
+
+
+  <script>
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modal-img");
+    const galleryThumbs = document.querySelectorAll(".gallery-thumb");
+    const closeBtn = document.querySelector(".close");
+    const carouselTrack = document.getElementById("carousel-track");
+
+    galleryThumbs.forEach(thumb => {
+      thumb.addEventListener("click", () => {
+        modal.style.display = "block";
+        modalImg.src = thumb.src;
+      });
+    });
+
+    closeBtn.onclick = function () {
+      modal.style.display = "none";
+    }
+
+    window.onclick = function (event) {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    function scrollGallery(direction) {
+      const scrollAmount = 300;
+      carouselTrack.scrollLeft += direction * scrollAmount;
+    }
+  </script>
+
+
+</body>
+
+</html>
