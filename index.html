@@ -129,11 +129,17 @@
     }
 
     .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); /* FLEXIBLE */
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.product img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
 
     .product {
       background-color: #fff;
@@ -254,6 +260,12 @@
     font-weight: bold;
     cursor: pointer;
   }
+
+  @media (max-width: 768px) {
+  .products {
+    grid-template-columns: 1fr; /* 1 per row on mobile */
+  }
+}
   </style>
 </head>
 <body>
@@ -282,6 +294,32 @@
       <a href="#shop" class="btn">Book a Class</a>
     </div>
   </section>
+
+
+  <section id="shop" class="section">
+    <h3 style="font-size: 1.8rem; color: #b03c3c; margin-bottom: 1rem;">Mothers Day Specials</h3>
+    <div class="products">
+      <div class="product">
+        <img src="static/img/gallery/IMG-20250429-WA0010.jpg" alt="Easter Biscuit Class">
+      </div>
+      <div class="product">
+        <img src="static/img/gallery/IMG-20250429-WA0011.jpg" alt="Easter Biscuit Class">
+      </div>
+      <div class="product">
+        <img src="static/img/gallery/IMG-20250429-WA0012.jpg" alt="Easter Biscuit Class">
+      </div>
+      <div class="product">
+        <img src="static/img/gallery/IMG-20250429-WA0013.jpg" alt="Easter Biscuit Class">
+      </div>
+      <div class="product">
+        <img src="static/img/gallery/IMG-20250429-WA0014.jpg" alt="Easter Biscuit Class">
+      </div>
+      <div class="product">
+        <img src="static/img/gallery/IMG-20250429-WA0015.jpg" alt="Easter Biscuit Class">
+      </div>
+    </div>
+  </section>
+
 
   <section id="shop" class="section" >
     <h3 style="font-size: 1.8rem; color: #b03c3c; margin-bottom: 1rem;">Book a Royal Icing Class</h3>
